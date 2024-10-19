@@ -8,22 +8,22 @@
 
 void	hook(void* param)
 {
-	t_data* data;
-	t_uint	x;
-	t_uint	y;
+	t_fractal*	fractal;
+	t_uint		x;
+	t_uint		y;
 
-	data = param; 
-	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_P))
-		mlx_delete_image(data->mlx, data->image);
+	fractal = param; 
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(fractal->mlx);
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_P))
+		mlx_delete_image(fractal->mlx, fractal->image);
 	x = 0;
 	y = 0;
-	while (x < data->image->width)
+	while (x < fractal->image->width)
 	{
-		while (y < data->image->height)
+		while (y < fractal->img->height)
 		{
-			mlx_put_pixel(data->image, x, y, BRAT_GREEN);
+			mlx_put_pixel(fractal->image, x, y, BRAT_GREEN);
 			y++;
 		}
 		y = 0;
@@ -33,15 +33,15 @@ void	hook(void* param)
 
 int32_t	main(void)
 {
-	t_data		data;
+	t_fractal		fractal;
 
-	data.mlx = mlx_init(WIDTH, HEIGHT, "fract-ol", false);
-	if (!data.mlx)
+	fractal.mlx = mlx_init(WIDTH, HEIGHT, "fract-ol", false);
+	if (!fractal.mlx)
 		exit(EXIT_FAILURE);
-	data.image = mlx_new_image(data.mlx, 1024, 1024);
-	mlx_image_to_window(data.mlx, data.image, 0, 0);
-	mlx_loop_hook(data.mlx, &hook, &data);
-	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
+	fractal.image = mlx_new_image(fractal.mlx, 1024, 1024);
+	mlx_image_to_window(fractal.mlx, fractal.image, 0, 0);
+	mlx_loop_hook(fractal.mlx, &hook, &fractal);
+	mlx_loop(fractal.mlx);
+	mlx_terminate(fractal.mlx);
 	return (EXIT_SUCCESS);
 }

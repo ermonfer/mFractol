@@ -47,3 +47,15 @@ t_uint	iter(t_complex z, t_complex c, t_uint check, t_uint limit)
 	}
 	return (limit);
 }
+
+t_complex pixel_to_complex(t_fractal *fractal, t_pixel pxl)
+{
+	t_complex	z;
+	t_uint		range;
+	
+	range = (fractal->br_c.re - fractal->tl_c.re);
+	z.re = fractal->tl_c.re + (pxl.x / (double)fractal->img->width) * range;
+	range = (fractal->br_c.im - fractal->tl_c.im);
+	z.im = fractal->tl_c.im + (pxl.y / (double)fractal->img->height) * range;
+	return (z);
+}

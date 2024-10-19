@@ -40,19 +40,26 @@ typedef struct s_complex
 	double	im;
 }	t_complex;
 
-typedef struct s_data
+typedef struct s_fractal
 {
 	mlx_t			*mlx;
-	mlx_image_t		*image;
-	t_complex		z;
-	t_complex		c;
-	int				color_theme;
-	int				color_index;
-}	t_data;
+	mlx_image_t		*img;
+	t_complex		tl_c;
+	t_complex		br_c;
+	int				color;
+	int*			color_pos; 
+}	t_fractal;
+
+typedef struct s_pixel
+{
+	t_uint x;
+	t_uint y;
+}	t_pixel;
 
 t_complex	c_add(t_complex a, t_complex b);
 t_complex	c_mult(t_complex a, t_complex b);
 t_complex	c_square(t_complex a);
 double		c_modulus(t_complex a);
+t_complex	pixel_to_complex(t_fractal *fractal, t_pixel pixel);
 t_uint		iter(t_complex z, t_complex c, t_uint check, t_uint limit);
 #endif
