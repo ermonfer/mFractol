@@ -30,6 +30,7 @@
 # define SUPER_YELLOW		0xFCBE11FF
 # define PNKY_PASTEL		0xFFC4D6FF
 # define CUTE_GREEN			0xC1E378FF
+# define BRAT_GREEN			0x89CC04FF
 
 typedef unsigned int t_uint;
 
