@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fract-ol.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmontero <fmontero@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: fmontero <fmontero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-10-16 18:00:02 by fmontero          #+#    #+#             */
-/*   Updated: 2024-10-16 18:00:02 by fmontero         ###   ########.fr       */
+/*   Created: 2024/10/16 18:00:02 by fmontero          #+#    #+#             */
+/*   Updated: 2024/10/20 01:54:58 by fmontero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <math.h>
 # include <stdbool.h>
 
+# define MAX_ITER 800
+# define CHECK 1
 //Colors
 # define BLACK       		0x000000FF
 # define WHITE       		0xFFFFFFFF
-// Psychedelic colors
 # define NEON_ORANGE     	0xFF6600FF
 # define PSYCHEDELIC_PURPLE	0x660066FF
 # define AQUA_DREAM			0x33CCCCFF
@@ -46,8 +47,6 @@ typedef struct s_fractal
 	mlx_image_t		*img;
 	t_complex		tl_c;
 	t_complex		br_c;
-	int				color;
-	int*			color_pos; 
 }	t_fractal;
 
 typedef struct s_pixel
@@ -62,4 +61,10 @@ t_complex	c_square(t_complex a);
 double		c_modulus(t_complex a);
 t_complex	pixel_to_complex(t_fractal *fractal, t_pixel pixel);
 t_uint		iter(t_complex z, t_complex c, t_uint check, t_uint limit);
+
+int			get_color_grayscale(int iterations, int max_iterations);
+int			get_color_three_colors(int iterations, int max_iterations);
+int			get_color(t_pixel plx, t_uint max_iter);
+
+void		hook(void* param);
 #endif
