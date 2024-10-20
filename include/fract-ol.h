@@ -47,6 +47,9 @@ typedef struct s_fractal
 	mlx_image_t		*img;
 	t_complex		tl_c;
 	t_complex		br_c;
+	char*			name;
+	t_complex		z;
+	t_complex		v;
 }	t_fractal;
 
 typedef struct s_pixel
@@ -67,4 +70,5 @@ int			get_color_three_colors(int iterations, int max_iterations);
 int			get_color(t_pixel plx, t_uint max_iter);
 
 void		hook(void* param);
+t_fractal	init_fractal(char* name);
 #endif
