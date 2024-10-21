@@ -24,7 +24,7 @@ t_complex	c_mult(t_complex a, t_complex b)
 
 t_complex	c_square(t_complex a)
 {
-	return ((t_complex){a.re * a.re - a.im * a.im, a.re * a.im + a.im * a.re});
+	return ((t_complex){a.re * a.re - a.im * a.im, 2.0 * a.re * a.im});
 }
 
 double	c_modulus(t_complex a)
@@ -51,11 +51,20 @@ t_uint	iter(t_complex z, t_complex c, t_uint check, t_uint limit)
 t_complex pixel_to_complex(t_fractal *fractal, t_pixel pxl)
 {
 	t_complex	z;
-	t_uint		range;
+	double		range;
 	
 	range = (fractal->br_c.re - fractal->tl_c.re);
 	z.re = fractal->tl_c.re + (pxl.x / (double)fractal->img->width) * range;
-	range = (fractal->br_c.im - fractal->tl_c.im);
-	z.im = fractal->tl_c.im + (pxl.y / (double)fractal->img->height) * range;
+	range = (fractal->tl_c.im - fractal->br_c.im);
+	z.im = fractal->br_c.im + (pxl.y / (double)fractal->img->height) * range;
 	return (z);
+}
+
+int main(void)
+{
+	t_fractal fractal;
+	fractal.br_c = (t_complex){3.0, 0.0};
+	fractal.tl_c = (t_complex){0.0, 3.0};
+	fractal.img->width = 1000;
+	fractal.img->height = 1000;
 }
