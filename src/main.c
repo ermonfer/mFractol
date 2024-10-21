@@ -16,7 +16,7 @@ void	hook(void* param)
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(fractal->mlx);
 	if (mlx_is_key_down(fractal->mlx, MLX_KEY_P))
-		mlx_delete_img(fractal->mlx, fractal->img);
+		mlx_delete_image(fractal->mlx, fractal->img);
 	x = 0;
 	y = 0;
 	while (x < fractal->img->width)
@@ -38,8 +38,8 @@ int32_t	main(void)
 	fractal.mlx = mlx_init(WIDTH, HEIGHT, "fract-ol", false);
 	if (!fractal.mlx)
 		exit(EXIT_FAILURE);
-	fractal.img = mlx_new_img(fractal.mlx, 1024, 1024);
-	mlx_img_to_window(fractal.mlx, fractal.img, 0, 0);
+	fractal.img = mlx_new_image(fractal.mlx, 1024, 1024);
+	mlx_image_to_window(fractal.mlx, fractal.img, 0, 0);
 	mlx_loop_hook(fractal.mlx, &hook, &fractal);
 	mlx_loop(fractal.mlx);
 	mlx_terminate(fractal.mlx);
