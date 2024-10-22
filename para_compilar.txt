@@ -1,0 +1,1 @@
+compi -Wunreachable-code -Ofast src/complex.c ./lib/libft/libft.a ./lib/MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm -I ./include -I ./lib/MLX42/include/ -I ./lib/libft/include/

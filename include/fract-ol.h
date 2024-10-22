@@ -16,6 +16,7 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
+# include <stdlib.h>
 
 # define MAX_ITER 800
 # define CHECK 1
@@ -69,6 +70,5 @@ int			get_color_grayscale(int iterations, int max_iterations);
 int			get_color_three_colors(int iterations, int max_iterations);
 int			get_color(t_pixel plx, t_uint max_iter);
 
-void		hook(void* param);
 t_fractal	init_fractal(char* name);
 #endif

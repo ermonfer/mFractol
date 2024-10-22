@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/fract-ol.h"
+#include <stdio.h>
 
 t_complex	c_add(t_complex a, t_complex b)
 {
@@ -60,11 +61,63 @@ t_complex pixel_to_complex(t_fractal *fractal, t_pixel pxl)
 	return (z);
 }
 
+static void	hook(void *param)
+{
+	t_fractal	*fractal;
+	t_pixel		pxl;
+	t_complex	z;
+
+	fractal = param;
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(fractal->mlx);
+	if (mlx_is_key_down(fractal->mlx, MLX_KEY_Y))
+	{
+		pxl = (t_pixel){0, 0};
+		while (pxl.x < fractal->img->width)
+		{
+			pxl.y = 0;
+			while (pxl.y < fractal->img->height)
+			{
+				z = pixel_to_complex(fractal, pxl);
+				mlx_put_pixel(fractal->img, pxl.x, pxl.y, BLACK);
+				pxl.y++;
+			}
+			pxl.x++;
+		}
+	}
+}
+
 int main(void)
 {
 	t_fractal fractal;
+
+	t_uint width = 100;
+	t_uint height = 100;
+
+	fractal.mlx = mlx_init(width, height, "fract-ol", false);
+	if (!fractal.mlx)
+		exit(1);
 	fractal.br_c = (t_complex){3.0, 0.0};
 	fractal.tl_c = (t_complex){0.0, 3.0};
-	fractal.img->width = 1000;
-	fractal.img->height = 1000;
+	fractal.img = mlx_new_image(fractal.mlx, width, height);
+	t_pixel	pxl = (t_pixel){0, 0};
+	t_complex z; 
+	fractal.img = mlx_new_image(fractal.mlx, width, height);
+	mlx_image_to_window(fractal.mlx, fractal.img, 0, 0);
+	while (pxl.x < width)
+	{
+		pxl.y = 0;
+		while (pxl.y <height)
+		{
+			z = pixel_to_complex(&fractal, pxl);
+			printf("(%f, %f)\n", z.re, z.im);
+			mlx_put_pixel(fractal.img, pxl.x, pxl.y, BRAT_GREEN);
+			pxl.y++;
+		}
+		pxl.x++;
+	}
+	mlx_loop_hook(fractal.mlx, &hook, &fractal);
+	mlx_loop(fractal.mlx);
+	mlx_terminate(fractal.mlx);
+	return (0);
 }
