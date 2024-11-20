@@ -28,21 +28,21 @@ OUT := $(OUTDIR)/$(NAME)
 
 #Reglas de compilación
 
-all: $(MLX_DIR) $(LIBFT_DIR) $(OUT)
+all: $(MLX_DIR)/Makefile $(LIBFT_DIR)/Makefile $(OUT)
 
 $(OUT): $(MLX) $(LIBFT) $(OBJ_MAN)
 	$(CC) $(CFLAGS) $(HEADERS) -o $@ $(OBJ_MAN) $(LIBS) $(LDFLAGS)
 
-bonus: $(MLX_DIR) $(LIBFT_DIR) $(OUTDIR)/.cache_bonus
+bonus: $(MLX_DIR)/Makefile $(LIBFT_DIR)/Makefile $(OUTDIR)/.cache_bonus
 	@touch $(OUTDIR)/.cache_bonus
 
 $(OUTDIR)/.cache_bonus: $(MLX) $(LIBFT) $(OBJ_BONUS) 
 	$(CC) $(CFLAGS) $(HEADERS) -o $(OUT) $(OBJ_BONUS) $(LIBS) $(LDFLAGS)
 	
-$(MLX_DIR)/makefile:
+$(MLX_DIR)/Makefile:
 	git submodule update --init --recursive
 
-$(LIBFT_DIR)/makefile:
+$(LIBFT_DIR)/Makefile:
 	git submodule update --init --recursive
 
 modules: $(LIBFT_DIR)/Makefile $(MLX_DIR)/Makefile
