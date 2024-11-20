@@ -27,8 +27,8 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/libft/include/extra.h"
 
-# define WIDTH 700
-# define HEIGHT 700
+# define WIDTH 900
+# define HEIGHT 900
 # define INITIAL_ESCAPE_LIMIT 80U
 # define INITIAL_VERTEX_RE -2.15
 # define INITIAL_VERTEX_IM 1.5

@@ -40,10 +40,6 @@ void	redraw(t_fractal *fractal)
 
 int	close_handler(t_mlx_interface *interface)
 {
-	mlx_destroy_image(interface->mlx_connection,
-		interface->img.context);
-	mlx_destroy_window(interface->mlx_connection,
-		interface->mlx_window);
 	mlx_loop_end(interface->mlx_connection);
 	return (0);
 }

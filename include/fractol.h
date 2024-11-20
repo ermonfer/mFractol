@@ -27,15 +27,15 @@
 # include "../lib/libft/include/libft.h"
 # include "../lib/libft/include/extra.h"
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 900
+# define HEIGHT 900
 # define INITIAL_ESCAPE_LIMIT 80U
 # define INITIAL_VERTEX_RE -2.15
 # define INITIAL_VERTEX_IM 1.5
 # define INITIAL_COMPLEX_WIDTH 3.0
 # define INITIAL_COMPLEX_HEIGHT 3.0
 # define ZOOM_FACTOR 1.05
-# define ERROR_MESSAGE "Valid inputs:\nmandelbrot\njulia c.re c.im\ntricorn\n"
+# define ERROR_MESSAGE "Valid inputs:\nmandelbrot\njulia c.re c.im\n"
 
 # define BLACK       		0xFF000000
 # define WHITE       		0xFFFFFFFF

@@ -23,6 +23,10 @@ int	main(int argc, char *argv[])
 		fractal.mlx_interface.mlx_window,
 		fractal.mlx_interface.img.context, 0, 0);
 	mlx_loop(fractal.mlx_interface.mlx_connection);
+	mlx_destroy_image(fractal.mlx_interface.mlx_connection,
+		fractal.mlx_interface.img.context);
+	mlx_destroy_window(fractal.mlx_interface.mlx_connection,
+		fractal.mlx_interface.mlx_window);
 	mlx_destroy_display(fractal.mlx_interface.mlx_connection);
 	free(fractal.mlx_interface.mlx_connection);
 	return (EXIT_SUCCESS);

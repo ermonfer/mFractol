@@ -1,11 +1,14 @@
 NAME 	:= fractol
-MLX := lib/minilibx-linux/libmlx_Linux.a
-LIBFT := lib/libft/libft.a
+MLX_DIR := lib/minilibx-linux/
+LIBFT_DIR := lib/libft/
+MLX := $(MLX_DIR)/libmlx_Linux.a
+LIBFT := $(LIBFT_DIR)/libft.a
+
 
 #Compilador y Flags
 CC	:= gcc
 CFLAGS	:= -Wall -Werror -Wextra -Ofast -march=native -funroll-loops
-HEADERS	:= -I/usr/local/include -I./minilibx-linux
+HEADERS	:= -I/usr/local/include -I./lib/minilibx-linux
 
 #Archivos fuente y directorios
 DIR_MANDATORY	:= mandatory
@@ -25,17 +28,26 @@ OUT := $(OUTDIR)/$(NAME)
 
 #Reglas de compilación
 
-all: $(OUT)
+all: $(MLX_DIR) $(LIBFT_DIR) $(OUT)
 
 $(OUT): $(MLX) $(LIBFT) $(OBJ_MAN)
 	$(CC) $(CFLAGS) $(HEADERS) -o $@ $(OBJ_MAN) $(LIBS) $(LDFLAGS)
 
-bonus: $(OUTDIR)/.cache_bonus
+bonus: $(MLX_DIR) $(LIBFT_DIR) $(OUTDIR)/.cache_bonus
 	@touch $(OUTDIR)/.cache_bonus
 
 $(OUTDIR)/.cache_bonus: $(MLX) $(LIBFT) $(OBJ_BONUS) 
 	$(CC) $(CFLAGS) $(HEADERS) -o $(OUT) $(OBJ_BONUS) $(LIBS) $(LDFLAGS)
 	
+$(MLX_DIR)/makefile:
+	git submodule update --init --recursive
+
+$(LIBFT_DIR)/makefile:
+	git submodule update --init --recursive
+
+modules: $(LIBFT_DIR)/Makefile $(MLX_DIR)/Makefile
+	git submodule update --init --recursive
+
 $(MLX):
 	make -C ./lib/minilibx-linux
 
